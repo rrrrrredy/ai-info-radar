@@ -98,11 +98,12 @@ Select tools by platform type:
 
 | Platform | Primary Tool | Fallback Tool |
 |---------|---------|---------|
-| WeChat Accounts | Camoufox + HTTP proxy / web search | Web search engines |
-| Twitter/X | `x_scraper.py` / guest token GraphQL API (no account needed) | Web search fallback |
+| WeChat Accounts | agent-reach fetch / Camoufox + HTTP proxy | Web search engines |
+| Twitter/X | xreach (agent-reach) → `x_scraper.py` (guest token fallback) | Web search fallback |
 | Weibo | Web search to locate UID/post URL + Playwright (visitor cookie) | — |
-| Blogs/Websites | `web_fetch` / `r.jina.ai` | web_search |
+| Blogs/Websites | xread (agent-reach) → `web_fetch` / `r.jina.ai` | web_search |
 | Bilibili/YouTube | yt-dlp / platform API | web_search |
+| Content Search | mcporter/Exa (agent-reach) → Jina Search API (free) | DuckDuckGo HTML |
 | Podcasts | iTunes Search API → RSS → download XML → parse latest episode | faster-whisper local transcription |
 
 > 📌 **Xiaoyuzhou Podcasts**: Use iTunes Search API to get RSS → download XML → parse latest episode. See `references/podcast-xiaoyuzhou.md`.
@@ -279,6 +280,24 @@ Summary (2-3 lines)
 - Python 3.8+ (usually pre-installed)
 - `feedparser`: `pip install feedparser` (RSS parsing; auto-prompted on first use)
 - `requests`: `pip install requests` (usually pre-installed)
+
+### Recommended: agent-reach (enhanced search & fetch)
+
+`agent-reach` provides superior multi-platform search (xreach), content extraction (xread), and API wrappers (mcporter/Exa). Without it, the skill falls back to Jina Search API and guest token GraphQL.
+
+**Install (choose one):**
+```bash
+# Option 1: pip (recommended)
+pip install agent-reach
+agent-reach install --env=auto --safe
+
+# Option 2: ClawHub
+npx clawhub install agent-reach
+```
+
+After installation, run `agent-reach doctor` to verify. Optional: `npm i -g mcporter && mcporter config add exa https://mcp.exa.ai/mcp` for Exa semantic search.
+
+> Without agent-reach, the skill auto-falls back to Jina Search API + guest token GraphQL — still functional for most use cases.
 
 ---
 
