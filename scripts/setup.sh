@@ -20,6 +20,18 @@ if ! python3 -c "import requests" 2>/dev/null; then
   MISSING=1
 fi
 
+if ! python3 -c "import fuzzywuzzy" 2>/dev/null; then
+  echo "📦 安装 fuzzywuzzy..."
+  pip install -q fuzzywuzzy python-Levenshtein
+  MISSING=1
+fi
+
+if ! python3 -c "import bs4" 2>/dev/null; then
+  echo "📦 安装 beautifulsoup4..."
+  pip install -q beautifulsoup4
+  MISSING=1
+fi
+
 if [ "$MISSING" -eq 0 ]; then
   echo "✅ 所有依赖已就绪"
 else
@@ -29,4 +41,6 @@ fi
 # 最终验证
 python3 -c "import feedparser; print('验证通过: feedparser')"
 python3 -c "import requests; print('验证通过: requests')"
+python3 -c "import fuzzywuzzy; print('验证通过: fuzzywuzzy')"
+python3 -c "import bs4; print('验证通过: beautifulsoup4')"
 echo "🎉 setup 完成，可以正常使用"
