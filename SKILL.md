@@ -99,7 +99,7 @@ Select tools by platform type:
 | Platform | Primary Tool | Fallback Tool |
 |---------|---------|---------|
 | WeChat Accounts | Camoufox + HTTP proxy / web search | Web search engines |
-| Twitter/X | `x_scraper.py` (guest token, no account needed) | xreach (when auth-token available) |
+| Twitter/X | `x_scraper.py` / guest token GraphQL API (no account needed) | Web search fallback |
 | Weibo | Web search to locate UID/post URL + Playwright (visitor cookie) | — |
 | Blogs/Websites | `web_fetch` / `r.jina.ai` | web_search |
 | Bilibili/YouTube | yt-dlp / platform API | web_search |

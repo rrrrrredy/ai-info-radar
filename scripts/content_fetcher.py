@@ -4,6 +4,7 @@ AI信息雷达 - 内容抓取器
 抓取各大媒体最新内容
 """
 
+import os
 import subprocess
 import json
 import re
@@ -117,65 +118,163 @@ class ContentFetcher:
             return []
     
     def fetch_from_twitter(self, username: str, limit: int = 5) -> List[Dict]:
-        """从Twitter抓取最新推文"""
+        """Fetch latest tweets using X/Twitter guest token GraphQL API (no login required)."""
+        BEARER = "AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA"
+        UA = "TwitterAndroid/10.21.0-release.0 (310210000-r-0) ONEPLUS+A3010/9 (OnePlus;ONEPLUS+A3010;OnePlus;OnePlus3;0;;1;2016)"
+
         try:
-            # 使用 xreach 工具
-            result = subprocess.run(
-                ["xreach", "tweets", f"@{username}", "-n", str(limit), "--json"],
-                capture_output=True,
-                text=True,
-                timeout=30
+            # Step 1: Get guest token
+            headers = {"Authorization": f"Bearer {BEARER}", "User-Agent": UA}
+            proxy_url = os.environ.get("HTTP_PROXY") or os.environ.get("HTTPS_PROXY")
+            proxies = {"http": proxy_url, "https": proxy_url} if proxy_url else None
+
+            r = requests.post(
+                "https://api.twitter.com/1.1/guest/activate.json",
+                headers=headers, proxies=proxies, timeout=15
             )
-            
-            tweets = json.loads(result.stdout)
+            guest_token = r.json()["guest_token"]
+
+            # Step 2: Get user info
+            gql_headers = {
+                "Authorization": f"Bearer {BEARER}",
+                "x-guest-token": guest_token,
+                "User-Agent": UA,
+                "x-twitter-client-language": "en",
+                "x-twitter-active-user": "yes",
+            }
+            variables = json.dumps({"screen_name": username, "withSafetyModeUserFields": True})
+            features = json.dumps({
+                "hidden_profile_likes_enabled": True, "hidden_profile_subscriptions_enabled": True,
+                "responsive_web_graphql_exclude_directive_enabled": True,
+                "verified_phone_label_enabled": False,
+                "responsive_web_graphql_skip_user_profile_image_extensions_enabled": False,
+                "responsive_web_graphql_timeline_navigation_enabled": True,
+            })
+            r2 = requests.get(
+                "https://x.com/i/api/graphql/NimuplG1OB7Fd2btCLdBOw/UserByScreenName",
+                params={"variables": variables, "features": features},
+                headers=gql_headers, proxies=proxies, timeout=15
+            )
+            user_data = r2.json().get("data", {}).get("user", {}).get("result", {})
+            user_id = user_data.get("rest_id", "")
+
+            if not user_id:
+                print(f"  Twitter: Could not resolve user @{username}")
+                return []
+
+            # Step 3: Get timeline
+            tl_vars = json.dumps({"userId": user_id, "count": min(limit, 20),
+                                  "includePromotedContent": False, "withVoice": True, "withV2Timeline": True})
+            tl_feats = json.dumps({
+                "rweb_tipjar_consumption_enabled": True,
+                "responsive_web_graphql_exclude_directive_enabled": True,
+                "verified_phone_label_enabled": False,
+                "responsive_web_graphql_timeline_navigation_enabled": True,
+                "responsive_web_graphql_skip_user_profile_image_extensions_enabled": False,
+                "communities_web_enable_tweet_community_results_fetch": True,
+                "c9s_tweet_anatomy_moderator_badge_enabled": True,
+                "tweetypie_unmention_optimization_enabled": True,
+                "responsive_web_edit_tweet_api_enabled": True,
+                "graphql_is_translatable_rweb_tweet_is_translatable_enabled": True,
+                "view_counts_everywhere_api_enabled": True,
+                "longform_notetweets_consumption_enabled": True,
+                "responsive_web_twitter_article_tweet_consumption_enabled": True,
+                "tweet_awards_web_tipping_enabled": False,
+                "creator_subscriptions_tweet_preview_api_enabled": True,
+                "freedom_of_speech_not_reach_fetch_enabled": True,
+                "standardized_nudges_misinfo": True,
+                "tweet_with_visibility_results_prefer_gql_limited_actions_policy_enabled": True,
+                "rweb_video_timestamps_enabled": True,
+                "longform_notetweets_rich_text_read_enabled": True,
+                "longform_notetweets_inline_media_enabled": True,
+                "responsive_web_enhance_cards_enabled": False,
+            })
+            rt = requests.get(
+                "https://x.com/i/api/graphql/QWF3SzpHmykQHsQMixG0cg/UserTweets",
+                params={"variables": tl_vars, "features": tl_feats},
+                headers=gql_headers, proxies=proxies, timeout=15
+            )
+
             results = []
-            
-            for tweet in tweets:
-                results.append({
-                    "title": tweet.get("text", "")[:100] + "...",
-                    "url": f"https://twitter.com/{username}/status/{tweet.get('id')}",
-                    "summary": tweet.get("text", ""),
-                    "published": tweet.get("created_at", ""),
-                    "source": f"@{username}",
-                    "tags": ["Twitter"]
-                })
-            
-            return results
+            entries = []
+            try:
+                timeline = rt.json()["data"]["user"]["result"]["timeline_v2"]["timeline"]
+                for instruction in timeline.get("instructions", []):
+                    entries.extend(instruction.get("entries", []))
+            except (KeyError, TypeError):
+                pass
+
+            for entry in entries:
+                try:
+                    tweet_result = entry["content"]["itemContent"]["tweet_results"]["result"]
+                    legacy = tweet_result.get("legacy", {})
+                    text = legacy.get("full_text", "")
+                    tweet_id = legacy.get("id_str", tweet_result.get("rest_id", ""))
+                    created_at = legacy.get("created_at", "")
+                    if text:
+                        results.append({
+                            "title": text[:100] + ("..." if len(text) > 100 else ""),
+                            "url": f"https://twitter.com/{username}/status/{tweet_id}",
+                            "summary": text,
+                            "published": created_at,
+                            "source": f"@{username}",
+                            "tags": ["Twitter"]
+                        })
+                except (KeyError, TypeError):
+                    continue
+
+            return results[:limit]
         except Exception as e:
             print(f"Twitter fetch error: {e}")
             return []
     
     def search_latest_content(self, keyword: str, days: int = 2, limit: int = 10) -> List[Dict]:
-        """搜索关键词最新内容"""
+        """Search for latest content using Jina Search API (free, no API key required)."""
         results = []
-        
-        # 1. Use web search
+
+        # 1. Use Jina Search API (https://s.jina.ai)
         try:
-            # 使用 exa 搜索
-            result = subprocess.run(
-                ["mcporter", "call", f"exa.web_search_exa(query: '{keyword} AI news past {days} days', numResults: {limit})"],
-                capture_output=True,
-                text=True,
-                timeout=30
-            )
-            
-            # 解析结果
-            search_results = json.loads(result.stdout)
-            for item in search_results:
+            search_url = f"https://s.jina.ai/{requests.utils.quote(keyword + ' AI news')}"
+            headers = {"Accept": "application/json", "X-Retain-Images": "none"}
+            proxy_url = os.environ.get("HTTP_PROXY") or os.environ.get("HTTPS_PROXY")
+            proxies = {"http": proxy_url, "https": proxy_url} if proxy_url else None
+
+            r = requests.get(search_url, headers=headers, proxies=proxies, timeout=30)
+            data = r.json()
+
+            for item in data.get("data", [])[:limit]:
                 results.append({
                     "title": item.get("title", ""),
                     "url": item.get("url", ""),
-                    "summary": item.get("text", "")[:200],
-                    "published": "近期",
-                    "source": item.get("source", "网络搜索"),
+                    "summary": item.get("description", "")[:200],
+                    "published": "Recent",
+                    "source": item.get("url", "").split("/")[2] if item.get("url") else "Web search",
                     "tags": [keyword]
                 })
         except Exception as e:
-            print(f"Search error: {e}")
-        
-        # 2. 搜索RSS源
-        # 可以扩展更多RSS源
-        
+            print(f"Jina search error: {e}")
+
+        # 2. Fallback: DuckDuckGo HTML search (no API key needed)
+        if not results:
+            try:
+                ddg_url = f"https://html.duckduckgo.com/html/?q={requests.utils.quote(keyword + ' AI news')}"
+                r = requests.get(ddg_url, headers={"User-Agent": "Mozilla/5.0"}, proxies=proxies, timeout=15)
+                soup = BeautifulSoup(r.text, "html.parser")
+                for result_div in soup.select(".result__body")[:limit]:
+                    title_el = result_div.select_one(".result__title a")
+                    snippet_el = result_div.select_one(".result__snippet")
+                    if title_el:
+                        results.append({
+                            "title": title_el.get_text(strip=True),
+                            "url": title_el.get("href", ""),
+                            "summary": snippet_el.get_text(strip=True) if snippet_el else "",
+                            "published": "Recent",
+                            "source": "DuckDuckGo",
+                            "tags": [keyword]
+                        })
+            except Exception as e:
+                print(f"DuckDuckGo fallback error: {e}")
+
         return results[:limit]
     
     def fetch_media_latest(self, media_id: str, media_config: Dict, days: int = 2) -> List[Dict]:
