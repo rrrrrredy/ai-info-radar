@@ -1,0 +1,549 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-12",
+  "categories": {
+    "domestic_media": {
+      "name": "国内自媒体/公众号",
+      "description": "中文AI技术媒体和公众号",
+      "resources": [
+        {
+          "id": "jiqizhixin",
+          "name": "机器之心",
+          "type": "website+wechat",
+          "website": "https://www.jiqizhixin.com",
+          "rss": "https://www.jiqizhixin.com/rss",
+          "wechat": "almosthuman2014",
+          "description": "国内老牌AI技术媒体，覆盖前沿技术、产业动态",
+          "focus": ["前沿技术", "产业动态", "论文解读"],
+          "difficulty": "专业",
+          "update_freq": "每日多更",
+          "language": "中文"
+        },
+        {
+          "id": "qbitai",
+          "name": "量子位",
+          "type": "website+wechat",
+          "website": "https://www.qbitai.com",
+          "wechat": "QbitAI",
+          "description": "专注AI和前沿科技，报道产业新闻",
+          "focus": ["产业新闻", "公司动态", "产品发布"],
+          "difficulty": "通俗",
+          "update_freq": "每日多更",
+          "language": "中文"
+        },
+        {
+          "id": "infoq_ai",
+          "name": "InfoQ AI",
+          "type": "website+wechat",
+          "website": "https://www.infoq.cn/ai",
+          "wechat": "infoqchina",
+          "description": "技术媒体InfoQ的AI频道，偏工程实践",
+          "focus": ["工程实践", "技术架构", "案例分析"],
+          "difficulty": "专业",
+          "update_freq": "每日",
+          "language": "中文"
+        },
+        {
+          "id": "csdn_ai",
+          "name": "CSDN AI",
+          "type": "website",
+          "website": "https://ai.csdn.net",
+          "description": "开发者社区CSDN的AI频道",
+          "focus": ["技术教程", "开发实践"],
+          "difficulty": "入门",
+          "update_freq": "每日",
+          "language": "中文"
+        },
+        {
+          "id": "ai_front",
+          "name": "AI前线",
+          "type": "wechat",
+          "wechat": "ai-front",
+          "description": "专注AI技术和产品前沿",
+          "focus": ["技术前沿", "产品分析"],
+          "difficulty": "专业",
+          "update_freq": "每日",
+          "language": "中文"
+        },
+        {
+          "id": "xinzhiyuan",
+          "name": "新智元",
+          "type": "wechat",
+          "wechat": "AI_era",
+          "description": "AI产业媒体和智库",
+          "focus": ["产业新闻", "公司动态"],
+          "difficulty": "通俗",
+          "update_freq": "每日多更",
+          "language": "中文"
+        },
+        {
+          "id": "ai_review",
+          "name": "AI科技评论",
+          "type": "wechat",
+          "wechat": "aitechtalk",
+          "description": "雷锋网旗下AI媒体",
+          "focus": ["技术解读", "行业分析"],
+          "difficulty": "专业",
+          "update_freq": "每日",
+          "language": "中文"
+        },
+        {
+          "id": "datafun",
+          "name": "DataFunTalk",
+          "type": "wechat",
+          "wechat": "datafuntalk",
+          "description": "大数据和AI技术社区",
+          "focus": ["技术分享", "会议资料"],
+          "difficulty": "专业",
+          "update_freq": "每日",
+          "language": "中文"
+        },
+        {
+          "id": "ai_model_lab",
+          "name": "AI大模型实验室",
+          "type": "wechat",
+          "wechat": "AILab2023",
+          "description": "专注大模型技术和应用",
+          "focus": ["大模型", "Prompt工程"],
+          "difficulty": "专业",
+          "update_freq": "每日",
+          "language": "中文"
+        },
+        {
+          "id": "cyberzen",
+          "name": "赛博禅心",
+          "type": "wechat",
+          "wechat": "CyberZenLab",
+          "description": "AI产品思考和行业观察",
+          "focus": ["产品思考", "行业观察"],
+          "difficulty": "中等",
+          "update_freq": "每周",
+          "language": "中文"
+        },
+        {
+          "id": "baai",
+          "name": "智源研究院",
+          "type": "wechat",
+          "wechat": "BAIRInstitute",
+          "description": "北京智源人工智能研究院官方号",
+          "focus": ["学术研究", "开源项目"],
+          "difficulty": "专业",
+          "update_freq": "每周",
+          "language": "中文"
+        },
+        {
+          "id": "mila_forum",
+          "name": "Mila智源论坛",
+          "type": "wechat",
+          "wechat": "Mila-Forum",
+          "description": "AI学术交流平台",
+          "focus": ["学术讲座", "论文分享"],
+          "difficulty": "专业",
+          "update_freq": "每周",
+          "language": "中文"
+        }
+      ]
+    },
+    "twitter": {
+      "name": "Twitter/X 账号",
+      "description": "值得关注的AI领域Twitter账号",
+      "resources": [
+        {
+          "id": "feifei_li",
+          "name": "李飞飞",
+          "twitter": "drfeifei",
+          "description": "斯坦福AI实验室主任，ImageNet创始人",
+          "focus": ["AI安全", "AI for Good", "计算机视觉"],
+          "language": "英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "karpathy",
+          "name": "Andrej Karpathy",
+          "twitter": "karpathy",
+          "description": "前Tesla AI总监，OpenAI创始人之一",
+          "focus": ["深度学习", "自动驾驶", "LLM"],
+          "language": "英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "ylecun",
+          "name": "Yann LeCun",
+          "twitter": "ylecun",
+          "description": "Meta首席AI科学家，图灵奖得主",
+          "focus": ["深度学习", "自监督学习", "AI架构"],
+          "language": "英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "mu_li",
+          "name": "李沐",
+          "twitter": "mu_li",
+          "description": "AWS资深首席科学家，MXNet作者",
+          "focus": ["深度学习", "分布式训练"],
+          "language": "中英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "lin_junyang",
+          "name": "林俊旸",
+          "twitter": "linjunyang",
+          "description": "阿里通义千问核心作者",
+          "focus": ["大模型", "多模态"],
+          "language": "中英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "dai_yusen",
+          "name": "戴雨森",
+          "twitter": "daiyusen",
+          "description": "真格基金合伙人，关注AI投资",
+          "focus": ["AI投资", "创业观察"],
+          "language": "中文",
+          "difficulty": "通俗"
+        },
+        {
+          "id": "baoyu",
+          "name": "宝玉",
+          "twitter": "dotey",
+          "description": "AI产品专家，Prompt工程研究者",
+          "focus": ["Prompt工程", "产品体验"],
+          "language": "中文",
+          "difficulty": "中等"
+        },
+        {
+          "id": "opclave",
+          "name": "歸藏",
+          "twitter": "opclave",
+          "description": "AI工具和产品测评",
+          "focus": ["AI工具", "产品测评"],
+          "language": "中文",
+          "difficulty": "通俗"
+        },
+        {
+          "id": "swyx",
+          "name": "swyx",
+          "twitter": "swyx",
+          "description": "Latent Space播客主持人，AI工程师",
+          "focus": ["AI工程", "开源项目"],
+          "language": "英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "gdb",
+          "name": "Greg Brockman",
+          "twitter": "gdb",
+          "description": "OpenAI联合创始人兼总裁",
+          "focus": ["AGI", "OpenAI产品"],
+          "language": "英文",
+          "difficulty": "通俗"
+        },
+        {
+          "id": "sama",
+          "name": "Sam Altman",
+          "twitter": "sama",
+          "description": "OpenAI CEO",
+          "focus": ["AGI", "创业", "科技趋势"],
+          "language": "英文",
+          "difficulty": "通俗"
+        },
+        {
+          "id": "demishassabis",
+          "name": "Demis Hassabis",
+          "twitter": "demishassabis",
+          "description": "DeepMind CEO，诺贝尔化学奖得主",
+          "focus": ["AI研究", "科学发现"],
+          "language": "英文",
+          "difficulty": "专业"
+        }
+      ]
+    },
+    "blogs": {
+      "name": "博客/网站",
+      "description": "高质量AI博客和网站",
+      "resources": [
+        {
+          "id": "lesswrong",
+          "name": "LessWrong",
+          "website": "https://www.lesswrong.com",
+          "rss": "https://www.lesswrong.com/feed.xml",
+          "description": "理性主义和AI安全讨论社区",
+          "focus": ["AI安全", "理性主义", "有效利他"],
+          "language": "英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "import_ai",
+          "name": "Import AI",
+          "website": "https://importai.substack.com",
+          "description": "Jack Clark（Anthropic联合创始人）的AI newsletter",
+          "focus": ["AI政策", "技术趋势"],
+          "language": "英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "the_batch",
+          "name": "The Batch",
+          "website": "https://www.deeplearning.ai/the-batch/",
+          "description": "吴恩达的AI newsletter",
+          "focus": ["AI新闻", "技术解读"],
+          "language": "英文",
+          "difficulty": "中等"
+        },
+        {
+          "id": "papers_with_code",
+          "name": "Papers With Code",
+          "website": "https://paperswithcode.com",
+          "description": "论文+代码实现数据库",
+          "focus": ["论文", "开源代码"],
+          "language": "英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "huggingface_blog",
+          "name": "Hugging Face Blog",
+          "website": "https://huggingface.co/blog",
+          "rss": "https://huggingface.co/blog/feed.xml",
+          "description": "Hugging Face官方博客",
+          "focus": ["开源模型", "NLP", "多模态"],
+          "language": "英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "google_ai_blog",
+          "name": "Google AI Blog",
+          "website": "https://ai.googleblog.com",
+          "description": "Google AI官方博客",
+          "focus": ["研究论文", "产品发布"],
+          "language": "英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "openai_blog",
+          "name": "OpenAI Blog",
+          "website": "https://openai.com/blog",
+          "description": "OpenAI官方博客",
+          "focus": ["研究成果", "产品更新"],
+          "language": "英文",
+          "difficulty": "中等"
+        },
+        {
+          "id": "anthropic_blog",
+          "name": "Anthropic Blog",
+          "website": "https://www.anthropic.com/blog",
+          "description": "Anthropic官方博客",
+          "focus": ["AI安全", "Claude", "研究"],
+          "language": "英文",
+          "difficulty": "专业"
+        }
+      ]
+    },
+    "podcasts": {
+      "name": "播客",
+      "description": "AI相关播客节目",
+      "resources": [
+        {
+          "id": "42zhangjing",
+          "name": "42章经",
+          "platform": "小宇宙/Apple Podcasts",
+          "description": "创投圈深度访谈，大量AI创业者",
+          "focus": ["创业", "投资", "行业洞察"],
+          "language": "中文",
+          "difficulty": "中等"
+        },
+        {
+          "id": "silicon_valley_101",
+          "name": "硅谷101",
+          "platform": "小宇宙/Apple Podcasts",
+          "description": "硅谷科技和创业观察",
+          "focus": ["硅谷动态", "科技趋势"],
+          "language": "中文",
+          "difficulty": "通俗"
+        },
+        {
+          "id": "ai_insider",
+          "name": "AI局内人",
+          "platform": "小宇宙",
+          "description": "AI从业者访谈",
+          "focus": ["从业者视角", "技术实践"],
+          "language": "中文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "latent_space",
+          "name": "Latent Space",
+          "platform": "Apple Podcasts/Spotify",
+          "description": "AI工程师播客，技术深度",
+          "focus": ["AI工程", "开源项目", "技术趋势"],
+          "language": "英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "twiml_ai",
+          "name": "The TWIML AI Podcast",
+          "platform": "各大播客平台",
+          "description": "AI/ML领域深度访谈",
+          "focus": ["技术研究", "工业应用"],
+          "language": "英文",
+          "difficulty": "专业"
+        },
+        {
+          "id": "lex_fridman",
+          "name": "Lex Fridman Podcast",
+          "platform": "YouTube/Apple Podcasts",
+          "description": "MIT研究员的深度访谈节目",
+          "focus": ["AI", "科学", "哲学"],
+          "language": "英文",
+          "difficulty": "中等"
+        }
+      ]
+    },
+    "books": {
+      "name": "书籍",
+      "description": "AI相关经典书籍",
+      "resources": [
+        {
+          "id": "deep_learning_goodfellow",
+          "name": "《深度学习》(Deep Learning)",
+          "authors": ["Ian Goodfellow", "Yoshua Bengio", "Aaron Courville"],
+          "type": "技术",
+          "description": "深度学习圣经，数学基础+算法原理",
+          "difficulty": "专业",
+          "language": "中英文"
+        },
+        {
+          "id": "dive_into_dl",
+          "name": "《动手学深度学习》(Dive into Deep Learning)",
+          "authors": ["阿斯顿·张", "李沐", "扎卡里·立顿", "亚历山大·斯莫拉"],
+          "type": "技术",
+          "description": "理论与实践结合，代码可运行",
+          "difficulty": "入门",
+          "language": "中英文"
+        },
+        {
+          "id": "ai_modern_approach",
+          "name": "《人工智能：现代方法》(AIMA)",
+          "authors": ["Stuart Russell", "Peter Norvig"],
+          "type": "技术",
+          "description": "AI领域经典教材，全面系统",
+          "difficulty": "专业",
+          "language": "英文"
+        },
+        {
+          "id": "life_3_0",
+          "name": "《生命3.0》(Life 3.0)",
+          "authors": ["Max Tegmark"],
+          "type": "科普/历史",
+          "description": "AI时代人类的未来，MIT教授著作",
+          "difficulty": "通俗",
+          "language": "中英文"
+        },
+        {
+          "id": "ai_superpowers",
+          "name": "《AI·未来》(AI Superpowers)",
+          "authors": ["李开复"],
+          "type": "产业",
+          "description": "中美AI竞争格局分析",
+          "difficulty": "通俗",
+          "language": "中英文"
+        },
+        {
+          "id": "humans_guide_ai",
+          "name": "《AI新生》(Human Compatible)",
+          "authors": ["Stuart Russell"],
+          "type": "科普",
+          "description": "AI安全问题经典著作",
+          "difficulty": "中等",
+          "language": "中英文"
+        },
+        {
+          "id": "the_singularity",
+          "name": "《奇点临近》(The Singularity Is Near)",
+          "authors": ["Ray Kurzweil"],
+          "type": "科普/预测",
+          "description": "技术奇点预测，未来主义经典",
+          "difficulty": "中等",
+          "language": "中英文"
+        },
+        {
+          "id": "machines_of_loving_grace",
+          "name": "《机器之心》(Machines of Loving Grace)",
+          "authors": ["John Markoff"],
+          "type": "历史",
+          "description": "AI和机器人发展历史",
+          "difficulty": "通俗",
+          "language": "英文"
+        }
+      ]
+    },
+    "videos": {
+      "name": "视频/课程",
+      "description": "AI学习视频和在线课程",
+      "resources": [
+        {
+          "id": "li_hongyi_ml",
+          "name": "李宏毅机器学习",
+          "platform": "B站/YouTube",
+          "description": "台大教授经典机器学习课程，中文讲解",
+          "focus": ["机器学习", "深度学习"],
+          "difficulty": "入门",
+          "language": "中文"
+        },
+        {
+          "id": "wu_ennda_dl",
+          "name": "吴恩达深度学习",
+          "platform": "Coursera/B站",
+          "description": "Coursera王牌课程，系统全面",
+          "focus": ["深度学习", "CNN", "RNN", "Transformer"],
+          "difficulty": "入门",
+          "language": "英文(中字)"
+        },
+        {
+          "id": "mu_li_dive",
+          "name": "李沐动手学深度学习",
+          "platform": "B站/YouTube",
+          "description": "逐行代码讲解，实践导向",
+          "focus": ["深度学习", "PyTorch"],
+          "difficulty": "入门",
+          "language": "中文"
+        },
+        {
+          "id": "karpathy_nn",
+          "name": "Andrej Karpathy神经网络",
+          "platform": "YouTube",
+          "description": "从零实现神经网络，深入底层",
+          "focus": ["神经网络", "反向传播", "Transformer"],
+          "difficulty": "中等",
+          "language": "英文"
+        },
+        {
+          "id": "3blue1brown_nn",
+          "name": "3Blue1Brown深度学习",
+          "platform": "YouTube/B站",
+          "description": "可视化讲解神经网络原理",
+          "focus": ["神经网络", "可视化"],
+          "difficulty": "入门",
+          "language": "英文"
+        },
+        {
+          "id": "two_minute_papers",
+          "name": "Two Minute Papers",
+          "platform": "YouTube",
+          "description": "AI论文快速解读",
+          "focus": ["论文解读", "前沿技术"],
+          "difficulty": "通俗",
+          "language": "英文"
+        }
+      ]
+    }
+  },
+  "keywords": {
+    "agent": ["Agent", "智能体", "AutoGPT", "MetaGPT", "crewAI", "LangChain", "多智能体"],
+    "ai_agent_framework": ["AI Agent Framework", "Multi-Agent", "Tool Use", "AI Agent Platform"],
+    "llm": ["LLM", "大模型", "大语言模型", "GPT", "Claude", "通义千问", "文心一言"],
+    "multimodal": ["多模态", "视觉语言模型", "VLM", "图像生成", "视频生成"],
+    "safety": ["AI安全", "对齐", "RLHF", "Constitutional AI", "越狱", "幻觉"],
+    "product": ["AI产品", "PMF", "AI应用", "商业化", "用户体验"],
+    "startup": ["AI创业", "融资", "独角兽", "Startup", "PMF"]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "default_schedules": [
+    {
+      "name": "每日AI早报",
+      "frequency": "每日早9点",
+      "topic": "全部",
+      "count": 3,
+      "enabled": false
+    },
+    {
+      "name": "Agent动态追踪",
+      "frequency": "每6小时",
+      "topic": "Agent",
+      "count": 2,
+      "enabled": false
+    }
+  ],
+  "user_preferences": {
+    "difficulty": null,
+    "language": null,
+    "interests": []
+  },
+  "fetch_settings": {
+    "cache_duration": 300,
+    "max_results_per_query": 10,
+    "default_days_for_latest": 2
+  }
+}
