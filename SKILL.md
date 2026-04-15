@@ -1,10 +1,11 @@
 ---
 name: ai-info-radar
+version: 8.0.0
 description: "AI news and resource discovery with subscription push. Triggers: AI media recommendations, AI podcasts, AI books, AI news, AI video recommendations, set up push notifications, subscribe to AI news, AI daily digest, scheduled AI push, Weibo AI influencers, latest from Jiqizhixin. Not for: real-time search; non-AI media."
 tags: [ai, media, radar, news, podcast, book]
 ---
 
-# AI Information Radar V8
+# ai-info-radar 8.0.0
 
 ## First Use
 
@@ -303,7 +304,7 @@ After installation, run `agent-reach doctor` to verify. Optional: `npm i -g mcpo
 
 ## Changelog
 
-### V8 (2026-04-08)
+### 8.0.0 (2026-04-08)
 - Added Xiaoyuzhou podcast SOP (iTunes RSS + faster-whisper), new `references/podcast-xiaoyuzhou.md`
 - Added podcast row in Step 2 tool table
 
