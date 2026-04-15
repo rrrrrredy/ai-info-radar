@@ -87,7 +87,7 @@ Hung-Yi Lee ML, Andrew Ng Deep Learning, Mu Li Dive into DL, Andrej Karpathy Neu
 ## Execution Flow
 
 ### Step 1: Determine User Intent
-- Query resource list → Return matching category content directly (no fetching needed)
+- Query resource list → Return matching category content directly (see `references/resource-list.md` for full catalog)
 - Fetch latest content → Enter Step 2
 - Smart recommendation → Ask user background then recommend
 - Bookmark management → Read/write `~/.ai-info-radar/favorites.json`
@@ -308,25 +308,25 @@ After installation, run `agent-reach doctor` to verify. Optional: `npm i -g mcpo
 - Added Xiaoyuzhou podcast SOP (iTunes RSS + faster-whisper), new `references/podcast-xiaoyuzhou.md`
 - Added podcast row in Step 2 tool table
 
-### V7 (2026-04-08)
+### 7.0.0 (2026-04-08)
 - Added Weibo as data source: Chinese AI influencer tracking via web search + Playwright (visitor cookie)
 - New `references/weibo-source.md` (scraping SOP + known AI influencer accounts)
 
-### V6 (2026-04-08)
+### 6.0.0 (2026-04-08)
 - Integrated X/Twitter login-free scraping: `x_scraper.py` (guest token, no auth-token needed)
 
-### V5 (2026-04-08)
+### 5.0.0 (2026-04-08)
 - Cleaned up description triggers, removed unrelated entries
 - New `references/resource-list.md`
 
-### V3 (2026-04-08)
+### 3.0.0 (2026-04-08)
 - Upgraded to real subscription + scheduled push system (cron-driven, auto content fetching)
 - New "Subscription + Push Flow" section
 
-### V2 (2026-04-07)
+### 2.0.0 (2026-04-07)
 - Added execution flow (Step 1-3), platform tool selection and fallback rules
 - Added error handling table
 
-### V1 (Initial)
+### 1.0.0 (Initial)
 - Resource query, content fetching, smart recommendations, bookmarks, scheduled push
 - 50+ AI media/blog/podcast/book resources aggregated
