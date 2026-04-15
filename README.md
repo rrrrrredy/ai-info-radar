@@ -60,8 +60,10 @@ ai-info-radar/
 │   ├── podcast-xiaoyuzhou.md  # Xiaoyuzhou podcast SOP
 │   ├── resource-list.md       # Full resource catalog
 │   └── weibo-source.md        # Weibo scraping SOP
-├── config/                    # Runtime configuration
-├── data/                      # Runtime data storage
+├── config/
+│   └── default_schedule.json   # Push schedule configuration
+├── data/
+│   └── resources.json          # Resource database
 └── .gitignore
 ```
 
