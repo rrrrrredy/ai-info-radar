@@ -169,6 +169,8 @@ class ContentFetcher:
     
     def _fetch_twitter_graphql(self, username: str, limit: int = 5) -> List[Dict]:
         """Fetch tweets via X/Twitter guest token GraphQL API (no login)."""
+        # Twitter/X public guest API Bearer token (not a secret — same for all guest clients)
+        # See: https://github.com/zedeus/nitter/issues/983
         BEARER = "AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA"
         UA = "TwitterAndroid/10.21.0-release.0 (310210000-r-0) ONEPLUS+A3010/9 (OnePlus;ONEPLUS+A3010;OnePlus;OnePlus3;0;;1;2016)"
 

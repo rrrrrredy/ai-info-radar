@@ -61,9 +61,9 @@ ai-info-radar/
 │   ├── resource-list.md       # Full resource catalog
 │   └── weibo-source.md        # Weibo scraping SOP
 ├── config/
-│   └── default_schedule.json   # Push schedule configuration
+│   └── default_schedule.json  # Push schedule configuration
 ├── data/
-│   └── resources.json          # Resource database
+│   └── resources.json         # Resource database
 └── .gitignore
 ```
 
