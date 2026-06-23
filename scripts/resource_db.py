@@ -6,8 +6,31 @@ AI信息雷达 - 资源数据库管理
 
 import json
 import os
+from difflib import SequenceMatcher
 from typing import List, Dict, Optional, Any
-from fuzzywuzzy import fuzz
+
+try:
+    from fuzzywuzzy import fuzz
+except ImportError:
+    class fuzz:
+        @staticmethod
+        def ratio(a: str, b: str) -> int:
+            return int(SequenceMatcher(None, a, b).ratio() * 100)
+
+        @staticmethod
+        def partial_ratio(a: str, b: str) -> int:
+            if not a or not b:
+                return 0
+            short, long = (a, b) if len(a) <= len(b) else (b, a)
+            if short in long:
+                return 100
+            if len(short) == len(long):
+                return fuzz.ratio(short, long)
+            best = 0
+            window = len(short)
+            for i in range(0, len(long) - window + 1):
+                best = max(best, fuzz.ratio(short, long[i:i + window]))
+            return best
 
 class ResourceDB:
     """资源数据库管理类"""

@@ -27,6 +27,23 @@ bash scripts/setup.sh
 | **Bookmark Management** | Track read/favorite items | `Bookmark this`, `My AI reading list`, `My bookmarks` |
 | **Scheduled Push** | Custom frequency + topic notifications | `Set up hourly Agent news push` |
 
+## When not to use
+
+- Do not use for non-AI topics or general web search.
+- Do not use when the user requires real-time completeness; use live web search and state the freshness window instead.
+- Do not request cookies, tokens, login sessions, QR codes, or private account access for WeChat, X/Twitter, podcasts, or media sites.
+- Do not present aggregated or third-party results as official source content.
+
+## Output contract
+
+Match the user intent and always include:
+
+- source category or platform;
+- freshness window or last-check time when available;
+- direct source links or a clear fallback/source caveat;
+- recommendation reason, if recommending resources;
+- push schedule, topic, and delivery target, if configuring subscriptions.
+
 ---
 
 ## Trigger Words
