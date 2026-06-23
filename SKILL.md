@@ -1,8 +1,6 @@
 ---
 name: ai-info-radar
-version: 8.0.0
-description: "AI news and resource discovery with subscription push. Triggers: AI media recommendations, AI podcasts, AI books, AI news, AI video recommendations, set up push notifications, subscribe to AI news, AI daily digest, scheduled AI push, Weibo AI influencers, latest from Jiqizhixin. Not for: real-time search; non-AI media."
-tags: [ai, media, radar, news, podcast, book]
+description: 'AI news and resource discovery with subscription push. Triggers: AI media recommendations, AI podcasts, AI books, AI news, AI video recommendations, set up push notifications, subscribe to AI news, AI daily digest, scheduled AI push, Weibo AI influencers, latest from Jiqizhixin. Not for: real-time search; non-AI media.'
 ---
 
 # ai-info-radar 8.0.0
@@ -100,7 +98,7 @@ Select tools by platform type:
 | Platform | Primary Tool | Fallback Tool |
 |---------|---------|---------|
 | WeChat Accounts | agent-reach fetch / Camoufox + HTTP proxy | Web search engines |
-| Twitter/X | xreach (agent-reach) → `x_scraper.py` (guest token fallback) | Web search fallback |
+| Twitter/X | `scripts/content_fetcher.py` via xreach (agent-reach) → built-in guest token GraphQL fallback | Web search fallback |
 | Weibo | Web search to locate UID/post URL + Playwright (visitor cookie) | — |
 | Blogs/Websites | xread (agent-reach) → `web_fetch` / `r.jina.ai` | web_search |
 | Bilibili/YouTube | yt-dlp / platform API | web_search |
@@ -116,11 +114,15 @@ Select tools by platform type:
 **Twitter/X Fetch Example:**
 ```bash
 # Check AI researchers' latest tweets (top 10)
-python3 scripts/x_scraper.py timeline karpathy --count 10
-python3 scripts/x_scraper.py timeline ylecun --count 10
-# Get user full profile (with follower count)
-python3 scripts/x_scraper.py profile _LuoFuli --json
+python3 - <<'PY'
+from scripts.content_fetcher import ContentFetcher
+fetcher = ContentFetcher()
+for item in fetcher.fetch_from_twitter("karpathy", limit=10):
+    print(item["published"], item["summary"][:180], item["url"])
+PY
 ```
+
+For full X profile lookup, pinned tweets, Note Tweet long-form handling, or JSON export, route to the dedicated `x-twitter-scraper` skill instead of assuming this repository has `scripts/x_scraper.py`.
 
 ### Step 3: Content Processing & Output
 
@@ -248,7 +250,7 @@ Summary (2-3 lines)
 | Error Scenario | Handling |
 |---------|---------|
 | WeChat fetch failed (proxy issue) | Auto-fallback to web search, notify "content from third-party aggregation" |
-| Twitter/X fetch failed | Retry with `x_scraper.py timeline <handle>`; after 3 consecutive failures, notify user |
+| Twitter/X fetch failed | Retry once through `ContentFetcher.fetch_from_twitter(<handle>)`, then web search fallback; after 3 consecutive failures, notify user |
 | Website RSS broken | Switch to web_fetch for homepage article list |
 | Push job failed | Add heartbeat fallback trigger rule |
 
@@ -258,7 +260,7 @@ Summary (2-3 lines)
 
 ⚠️ WeChat Official Accounts may be blocked from direct access → Set `HTTP_PROXY` environment variable if needed
 
-⚠️ Twitter/X **no auth-token needed** → `x_scraper.py` + guest token provides login-free profile and timeline; **search is still limited** (guest token SearchTimeline returns empty)
+⚠️ Twitter/X **no auth-token needed** → `scripts/content_fetcher.py` uses xreach first, then guest-token GraphQL for login-free recent timeline fetch. For richer profile/tweet operations, use the dedicated `x-twitter-scraper` skill. Search is still limited without login; do not request auth tokens.
 
 ⚠️ RSS source becomes invalid → First try web_fetch for homepage articles, then fallback to web search
 
@@ -313,7 +315,7 @@ After installation, run `agent-reach doctor` to verify. Optional: `npm i -g mcpo
 - New `references/weibo-source.md` (scraping SOP + known AI influencer accounts)
 
 ### 6.0.0 (2026-04-08)
-- Integrated X/Twitter login-free scraping: `x_scraper.py` (guest token, no auth-token needed)
+- Integrated X/Twitter login-free fetching through `scripts/content_fetcher.py` (xreach + guest-token fallback, no auth-token needed)
 
 ### 5.0.0 (2026-04-08)
 - Cleaned up description triggers, removed unrelated entries
